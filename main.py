@@ -11,18 +11,23 @@ def juego():
     instrucciones = input("Ingrese las instrucciones que le dara al robot" 
                           "\n\t- 'F' (Mover al frente)\n\t- 'D' (Girar a la derecha)\n\t- 'I' (Girar a la izquierda)\n➡️  ")
     while instrucciones != "":
-        instruccion = instrucciones[0]
         system("cls")
-        if instruccion == "F":
-            robot.mover(tablero)
-        elif instruccion == "D":
-            robot.girar(True)
-        elif instruccion == "I":
-            robot.girar(False)
+    
+        instruccion = instrucciones[0]
+        match instruccion:
+            case "F":
+                robot.mover(tablero)
+            case "D":
+                robot.girar(True)
+            case "I":
+                robot.girar(False)
+            case _:
+                print("❌ Error. Movimiento no valido", instruccion)
 
         Tablero.pintar(tablero)
         contadorSegundos += 1
         instrucciones = instrucciones[1:]
+        
         print(f"Segundos: {contadorSegundos}, posicion del robot: {robot.posicion.en_tupla()}, "
                 f"orientacion del robot: {robot.orientacion.en_tupla()}"
                 f"frente del robot {robot.pos_casilla_frente().en_tupla()}"
